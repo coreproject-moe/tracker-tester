@@ -1,5 +1,5 @@
 {
-  "name": "node",
+  "name": "tracker-tester",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {

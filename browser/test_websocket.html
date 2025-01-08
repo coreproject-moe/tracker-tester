@@ -6,33 +6,28 @@
         <title>WebSocket Check</title>
     </head>
     <body>
-        <h1>WebSocket Connection Test</h1>
-        <div id="status">Connecting...</div>
+        <h1>WebSocket connection check</h1>
+        <div id="status">connecting...</div>
 
         <script>
             // Create WebSocket connection.
-            const socket = new WebSocket('ws://localhost:8080/'); // Replace with your WebSocket URL
+            const socket = new WebSocket('ws://localhost:8080/');
 
-            // Display status on the page
             const statusDiv = document.getElementById('status');
 
-            // Check if the WebSocket is open
             socket.addEventListener('open', function (event) {
                 console.log('WebSocket is open and working!');
                 statusDiv.textContent = 'WebSocket is connected.';
                 statusDiv.style.color = 'green';
             });
 
-            // Check for messages from the server
             socket.addEventListener('message', function (event) {
                 console.log('Message from server:', event.data);
-                // You can optionally display this message on the page
                 const messageDiv = document.createElement('div');
-                messageDiv.textContent = 'Message from server: ' + event.data;
+                messageDiv.textContent = 'message from server: ' + event.data;
                 document.body.appendChild(messageDiv);
             });
 
-            // Check for WebSocket close event
             socket.addEventListener('close', function (event) {
                 if (event.wasClean) {
                     console.log('WebSocket closed cleanly.');
@@ -44,9 +39,8 @@
                 }
             });
 
-            // Check for WebSocket errors
             socket.addEventListener('error', function (error) {
-                console.error('WebSocket Error:', error);
+                console.error('WebSocket rrror:', error);
                 statusDiv.textContent = 'WebSocket error occurred.';
                 statusDiv.style.color = 'red';
             });
