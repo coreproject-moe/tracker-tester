@@ -2,14 +2,20 @@ import WebTorrent from "webtorrent"
 
 const trackerUrls = [
   // 'udp://127.0.0.1:9000',
-  'http://127.0.0.1:8000',
+  // 'http://127.0.0.1:8000',
+  'http://[::1]:8000'
 ]
+const options = {
+  announce: trackerUrls,
+  dht: false,
+  localPeerDiscovery: false,
+}
 const file = new File(['Hello Torrent!'], 'test-torrent.txt', { type: 'text/plain' })
 
 // SEED
 const seedClient = new WebTorrent()
 console.log('starting...')
-seedClient.seed(file, { announce: trackerUrls }, (torrent) => {
+seedClient.seed(file, options, (torrent) => {
   console.log('seeding: ', torrent.infoHash)
   console.log('magnet uri: ', torrent.magnetURI)
 
@@ -26,7 +32,7 @@ seedClient.seed(file, { announce: trackerUrls }, (torrent) => {
     const magnetURI = torrent.magnetURI
 
     const downloadClient = new WebTorrent()
-    downloadClient.add(magnetURI, { announce: trackerUrls }, (downloadTorrent) => {
+    downloadClient.add(magnetURI, options, (downloadTorrent) => {
       console.log('downloading torrent: ', downloadTorrent.infoHash)
 
       downloadTorrent.on('download', (bytes) => {
