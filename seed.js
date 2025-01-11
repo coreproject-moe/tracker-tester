@@ -4,10 +4,14 @@ const client = new WebTorrent()
 const filePath = process.argv[2] || './seed-file.txt'
 
 const trackerUrls = [
-  // 'udp://127.0.0.1:8000',
-  'udp://[::1]:8000',
+  // 'udp://127.0.0.1:8001',
+  // 'udp://[::1]:8001',
   // 'http://127.0.0.1:9000',
   // 'http://[::1]:9000',
+  'udp://127.0.0.1:12000',
+  'udp://[::1]:12000',
+  'http://127.0.0.1:12001',
+  'http://[::1]:12001'
 ]
 const options = {
   announce: trackerUrls,
